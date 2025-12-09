@@ -1,3 +1,4 @@
+// backend/server.js
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -8,22 +9,8 @@ dotenv.config();
 
 const app = express();
 
-// CORS
-const allowedOrigins = [
-  "http://localhost:5000",
-  "http://localhost:5173",
-  "https://aitoolsprint-frontend.vercel.app",
-  "https://aitoolsprint.com",
-  "https://www.aitoolsprint.com",
-];
-
-app.use(
-  cors({
-    origin: allowedOrigins,
-  })
-);
-
-// Body parser
+// Middleware
+app.use(cors());
 app.use(express.json());
 
 // Test route
@@ -42,16 +29,15 @@ if (!MONGO_URI) {
   console.error("❌ MONGO_URI is not defined in environment variables");
 }
 
+// Connect to MongoDB first, then start server
 mongoose
   .connect(MONGO_URI)
   .then(() => {
     console.log("✅ MongoDB connected");
+    app.listen(PORT, () => {
+      console.log(`✅ Server running on port ${PORT}`);
+    });
   })
   .catch((err) => {
     console.error("❌ MongoDB connection error:", err.message);
   });
-
-// IMPORTANT: bind to a numeric port, not a string of code
-app.listen(PORT, () => {
-  console.log(`✅ Server running on port ${PORT}`);
-});
