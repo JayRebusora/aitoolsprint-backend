@@ -35,14 +35,13 @@ app.get("/", (req, res) => {
 app.use("/api/posts", postRoutes);
 
 // ====== PORT & DB SETUP ======
-const PORT = process.env.PORT || 10000;
+const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI;
 
 if (!MONGO_URI) {
   console.error("❌ MONGO_URI is not defined in environment variables");
 }
 
-// Connect to Mongo (but even if it fails, mag-li-listen pa rin server)
 mongoose
   .connect(MONGO_URI)
   .then(() => {
@@ -52,7 +51,7 @@ mongoose
     console.error("❌ MongoDB connection error:", err.message);
   });
 
-// IMPORTANT: Always bind to a port
+// IMPORTANT: bind to a numeric port, not a string of code
 app.listen(PORT, () => {
   console.log(`✅ Server running on port ${PORT}`);
 });
