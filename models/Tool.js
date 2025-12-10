@@ -9,6 +9,7 @@ const toolSchema = new mongoose.Schema(
     rating: { type: Number, default: 0 },
     price: { type: String, default: "N/A" },
     tag: { type: String, default: "" },
+    affiliateUrl: { type: String, default: "" },
   },
   { timestamps: true }
 );
