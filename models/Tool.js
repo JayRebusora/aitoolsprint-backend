@@ -10,6 +10,8 @@ const toolSchema = new mongoose.Schema(
     price: { type: String, default: "N/A" },
     tag: { type: String, default: "" },
     affiliateUrl: { type: String, default: "" },
+    isFeatured: { type: Boolean, default: false },
+
   },
   { timestamps: true }
 );

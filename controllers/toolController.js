@@ -51,3 +51,19 @@ export const createTool = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+export const getFeaturedTool = async (req, res) => {
+  try {
+    const tool = await Tool.findOne({ isFeatured: true }).sort({ createdAt: -1 });
+
+    if (!tool) {
+      return res.status(404).json({ message: "No featured tool set" });
+    }
+
+    res.json(tool);
+  } catch (err) {
+    console.error("Error fetching featured tool:", err.message);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
