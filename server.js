@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import postRoutes from "./routes/postRoutes.js";
+import toolRoutes from "./routes/toolRoutes.js";
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.get("/", (req, res) => {
 
 // ===== API ROUTES =====
 app.use("/api/posts", postRoutes);
+app.use("/api/tools", toolRoutes);
 
 // ===== PORT & DB SETUP =====
 const PORT = process.env.PORT || 5000;
