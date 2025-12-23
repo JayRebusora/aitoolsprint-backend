@@ -11,10 +11,22 @@ const toolSchema = new mongoose.Schema(
     tag: { type: String, default: "" },
     affiliateUrl: { type: String, default: "" },
     isFeatured: { type: Boolean, default: false },
-
   },
   { timestamps: true }
 );
+
+/* ✅ AUTO-GENERATE SLUG FROM NAME */
+toolSchema.pre("save", function (next) {
+  if (!this.slug && this.name) {
+    this.slug = this.name
+      .toLowerCase()
+      .trim()
+      .replace(/['"]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  }
+  next();
+});
 
 const Tool = mongoose.model("Tool", toolSchema);
 export default Tool;

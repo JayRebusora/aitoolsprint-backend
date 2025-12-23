@@ -8,9 +8,28 @@ import {
 
 const router = express.Router();
 
+/**
+ * @route   GET /api/tools/featured
+ * @desc    Get featured tool
+ */
 router.get("/featured", getFeaturedTool);
-router.get("/", getAllTools);        // GET /api/tools
-router.post("/", createTool);        // POST /api/tools
-router.get("/:slug", getToolBySlug); // GET /api/tools/slug
+
+/**
+ * @route   GET /api/tools
+ * @desc    Get all tools
+ */
+router.get("/", getAllTools);
+
+/**
+ * @route   POST /api/tools
+ * @desc    Create a new tool
+ */
+router.post("/", createTool);
+
+/**
+ * @route   GET /api/tools/:slug
+ * @desc    Get single tool by slug
+ */
+router.get("/:slug", getToolBySlug);
 
 export default router;
