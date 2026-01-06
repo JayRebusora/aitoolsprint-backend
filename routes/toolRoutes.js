@@ -4,6 +4,7 @@ import {
   getAllTools,
   getToolBySlug,
   getFeaturedTool,
+  updateTool,          // ✅ ADD
 } from "../controllers/toolController.js";
 
 const router = express.Router();
@@ -22,9 +23,15 @@ router.get("/", getAllTools);
 
 /**
  * @route   POST /api/tools
- * @desc    Create a new tool
+ * @desc    Create a new tool (supports affiliateUrl)
  */
 router.post("/", createTool);
+
+/**
+ * @route   PUT /api/tools/:id
+ * @desc    Update a tool (affiliateUrl, isFeatured, etc.)
+ */
+router.put("/:id", updateTool);   // ✅ ADD
 
 /**
  * @route   GET /api/tools/:slug
